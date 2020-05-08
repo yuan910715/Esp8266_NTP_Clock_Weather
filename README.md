@@ -1,5 +1,6 @@
 # Esp8266_NTP_Clock_Weather
 Esp8266 NTP时钟和气象站(使用和风天气API) 使用NTP网络时间 不用对时永远准确  
+看不到后边的图片的同学请自行爬梯 或看Pictures里的图  
 ![screen1.jpg](https://i.loli.net/2020/05/08/stXPQ8oKS5dcevk.jpg)
 
 ![screen2.jpg](https://i.loli.net/2020/05/08/zhkfZmyJbT7N4vi.jpg)
