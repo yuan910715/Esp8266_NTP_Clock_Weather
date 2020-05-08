@@ -64,8 +64,6 @@ uint8_t address[] = {0x28,0x44,0x9B,0x16,0xA8,0x01,0x3C,0x4B};
 const int UPDATE_INTERVAL_SECS = 20 * 60; // Update every 20 minutes  online weather
 // Setup
 const int UPDATE_CURR_INTERVAL_SECS = 10; // Update every 10 secs DS18B20
-// Setup
-const int UPDATE_NTP_INTERVAL_SECS = 24*60*60; // Update every day
 
 // Display Settings
 const int I2C_DISPLAY_ADDRESS = 0x3c;
@@ -108,11 +106,10 @@ String lastUpdate = "--";
 
 long timeSinceLastWUpdate = 0;
 long timeSinceLastCurrUpdate = 0;
-long timeSinceLastNTPUpdate = 0;
+
 String currTemp="-1.0";
 //declaring prototypes
 void drawProgress(OLEDDisplay *display, int percentage, String label);
-void updateTimeData(OLEDDisplay *display);
 void updateData(OLEDDisplay *display);
 void drawDateTime(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int16_t y);
 void drawCurrentWeather(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int16_t y);
@@ -188,7 +185,7 @@ void setup() {
   ui.init();
 
   Serial.println("");
-  updateTimeData(&display);
+  configTime(TZ_SEC, DST_SEC, "pool.ntp.org","0.cn.pool.ntp.org","1.cn.pool.ntp.org");
   updateData(&display);
 
 }
@@ -203,10 +200,7 @@ void loop() {
     currTemp=String(ds.getTempC(), 1);
     timeSinceLastCurrUpdate = millis();
   }
-if (millis() - timeSinceLastNTPUpdate > (1000L*UPDATE_NTP_INTERVAL_SECS)) {
-    updateTimeData(&display);
-    timeSinceLastNTPUpdate = millis();
-  }
+
 
 
 
@@ -234,14 +228,7 @@ void drawProgress(OLEDDisplay *display, int percentage, String label) {
   display->drawProgressBar(2, 28, 124, 10, percentage);
   display->display();
 }
-void updateTimeData(OLEDDisplay *display) {
-  drawProgress(display, 50, "Updating time...");
-  delay(2000);
-  configTime(TZ_SEC, DST_SEC, "pool.ntp.org","0.cn.pool.ntp.org","1.cn.pool.ntp.org");
-  drawProgress(display, 100, "Done...");
-  delay(2000);
-  
-}
+
 
 void updateData(OLEDDisplay *display) {
   drawProgress(display, 30, "Updating weather...");
