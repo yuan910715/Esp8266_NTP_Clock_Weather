@@ -1,13 +1,13 @@
 # Esp8266_NTP_Clock_Weather
 Esp8266 NTP时钟和气象站(使用和风天气API) 使用NTP网络时间 不用对时永远准确  
-![scr1](https://github.com/inramento/Esp8266_NTP_Clock_Weather/raw/master/Pictures/screen1.jpg)
+![scr1](https://sm.ms/image/stXPQ8oKS5dcevk)
 
-![scr2](https://github.com/inramento/Esp8266_NTP_Clock_Weather/raw/master/Pictures/screen2.jpg)
+![scr2](https://sm.ms/image/zhkfZmyJbT7N4vi)
 
-![scr3](https://github.com/inramento/Esp8266_NTP_Clock_Weather/raw/master/Pictures/screen3.jpg)
+![scr3](https://sm.ms/image/I43O2ELxYrWvAoD)
 
 ## 材料
-![list](https://github.com/inramento/Esp8266_NTP_Clock_Weather/raw/master/Pictures/list.jpg)
+![list](https://sm.ms/image/1uaDPfY3cjU784m)
 
 Esp8266 mini D1  
 1.3英寸Oled屏幕(SH1106/SSD1306) IIC 4线版(本程序仅适用于IIC 4线版本 SPI 7线版本需要改程序)  
@@ -22,7 +22,7 @@ http://arduino.esp8266.com/stable/package_esp8266com_index.json
 ![pic2](https://github.com/inramento/Esp8266_NTP_Clock_Weather/raw/master/Pictures/pic2.png)  
 点击工具 - 开发板 - 开发板管理器  
 搜索ESP8266并安装。  
-![pic1](https://github.com/inramento/Esp8266_NTP_Clock_Weather/raw/master/Pictures/pic1.png)  
+![pic1](https://sm.ms/image/mNBRfaV4S8sb37I)  
 
 2.Library Manager中安装  
 ArduinoJson库  用于解析和风天气API response的JSON  
@@ -32,7 +32,7 @@ OneWire库      用于连接DS18B20
 
 ## 焊接/连线  
 我的接线方法:(你也可以按你的喜好来,注意修改程序中的接口信息)  
-![wire](https://github.com/inramento/Esp8266_NTP_Clock_Weather/raw/master/Pictures/wire.jpg)
+![wire](https://sm.ms/image/OC8XKxFJwPenI3a)
 
 ## 3D打印外壳 
 模型是别人做的 作者Qrome 
