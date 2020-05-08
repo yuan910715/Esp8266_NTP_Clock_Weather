@@ -60,8 +60,6 @@ uint8_t address[] = {0x28,0x44,0x9B,0x16,0xA8,0x01,0x3C,0x4B};
 const int UPDATE_INTERVAL_SECS = 20 * 60; // Update every 20 minutes  online weather  
 DS18B20更新频率  
 const int UPDATE_CURR_INTERVAL_SECS = 10; // Update every 10 secs DS18B20  
-NTP时间更新频率  
-const int UPDATE_NTP_INTERVAL_SECS = 24*60*60; // Update every day  
 OLED地址以及管脚信息  
 const int I2C_DISPLAY_ADDRESS = 0x3c;  
 #if defined(ESP8266)  
