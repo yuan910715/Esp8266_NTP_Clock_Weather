@@ -73,3 +73,12 @@ const int SDC_PIN = D5;
 和风天气KEY 城市ID 自行去https://dev.heweather.com/ 注册  
 const char* HEFENG_KEY="";   
 const char* HEFENG_LOCATION="";  
+
+OLED屏幕一般有两种驱动SSD1306和SH1106  
+根据你买的屏幕 更改如下两行的信息 用错了会花屏  
+#include "SH1106Wire.h"//or #include "SSD1306Wire.h"  
+SH1106Wire     display(I2C_DISPLAY_ADDRESS, SDA_PIN, SDC_PIN);   // or SSD1306Wire  display(I2C_DISPLAY_ADDRESS, SDA_PIN, SDC_PIN);  
+
+## 其他
+和风天气目前免费版API提供了实时天气 天气预报 市级的空气质量等 可用的信息很多 如果你想显示其他信息 请查看API https://dev.heweather.com/docs/api/ 并更改HeFeng.app HeFeng.h中的结构体以及JSON解析信息  
+如果你想用其他网站的API 请自行修改HeFeng.app HeFeng.h
