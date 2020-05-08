@@ -33,6 +33,14 @@ OneWire库      用于连接DS18B20
 ## 焊接/连线  
 我的接线方法:(你也可以按你的喜好来,注意修改程序中的接口信息)  
 
+
+
+## 3D打印外壳 
+模型是别人做的 作者Qrome 
+一个是0.96英寸版本的 https://www.thingiverse.com/thing:2884823  
+一个是1.3英寸版本的 https://www.thingiverse.com/thing:2934049  
+他的项目是用于显示3D打印机打印状态的https://github.com/Qrome/printer-monitor  
+
 ## 程序  
 需要修改的地方：  
 你的wifissid 密码  
@@ -49,13 +57,13 @@ uint8_t address[] = {0x28,0x44,0x9B,0x16,0xA8,0x01,0x3C,0x4B};
 #define TZ              -8       // (utc+) TZ in hours  
 #define DST_MN          0      // use 60mn for summer time in some countries  
 
-第二屏实时天气 第三屏预报的更新频率
+第二屏实时天气 第三屏预报的更新频率  
 const int UPDATE_INTERVAL_SECS = 20 * 60; // Update every 20 minutes  online weather  
-DS18B20更新频率
+DS18B20更新频率  
 const int UPDATE_CURR_INTERVAL_SECS = 10; // Update every 10 secs DS18B20  
-NTP时间更新频率
+NTP时间更新频率  
 const int UPDATE_NTP_INTERVAL_SECS = 24*60*60; // Update every day  
-OLED地址以及管脚信息
+OLED地址以及管脚信息  
 const int I2C_DISPLAY_ADDRESS = 0x3c;  
 #if defined(ESP8266)  
 const int SDA_PIN = D2;  
