@@ -10,7 +10,7 @@ Esp8266 NTP时钟和气象站(使用和风天气API) 使用NTP网络时间 不�
 ![list](https://github.com/inramento/Esp8266_NTP_Clock_Weather/raw/master/Pictures/list.jpg)
 
 Esp8266 mini D1  
-1.3英寸Oled屏幕(SH1106/SSD1306)  
+1.3英寸Oled屏幕(SH1106/SSD1306) IIC 4线版(本程序仅适用于IIC 4线版本 SPI 7线版本需要改程序)  
 DS18B20 / 4.7k 上拉电阻  
 3D打印外壳  
 ## 程序
@@ -32,8 +32,7 @@ OneWire库      用于连接DS18B20
 
 ## 焊接/连线  
 我的接线方法:(你也可以按你的喜好来,注意修改程序中的接口信息)  
-
-
+![wire](https://github.com/inramento/Esp8266_NTP_Clock_Weather/raw/master/Pictures/wire.jpg)
 
 ## 3D打印外壳 
 模型是别人做的 作者Qrome 
