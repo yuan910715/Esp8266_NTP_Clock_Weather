@@ -50,12 +50,24 @@ void HeFeng::doUpdateCurr(HeFengCurrentData *data, String key,String location) {
          
         }  
       } else {  
-        Serial.printf("[HTTPS] GET... failed, error: %s\n", https.errorToString(httpCode).c_str());  
+        Serial.printf("[HTTPS] GET... failed, error: %s\n", https.errorToString(httpCode).c_str());
+         data->tmp="-1";                 
+         data->fl="-1";       
+         data->hum="-1";      
+         data->wind_sc="-1";         
+         data->cond_txt="no network";
+         data->iconMeteoCon=")";
       }  
   
       https.end();  
     } else {  
-      Serial.printf("[HTTPS] Unable to connect\n");  
+      Serial.printf("[HTTPS] Unable to connect\n");
+         data->tmp="-1";                 
+         data->fl="-1";       
+         data->hum="-1";      
+         data->wind_sc="-1";         
+         data->cond_txt="no network";
+         data->iconMeteoCon=")";
     }  
 
 }
@@ -96,11 +108,25 @@ void HeFeng::doUpdateFore(HeFengForeData *data, String key,String location) {
         }  
       } else {  
         Serial.printf("[HTTPS] GET... failed, error: %s\n", https.errorToString(httpCode).c_str());  
+          int i;
+           for (i=0; i<3; i++){               
+         data[i].tmp_min="-1";          
+         data[i].tmp_max="-1";    
+         data[i].datestr="N/A";
+         data[i].iconMeteoCon=")";
+           }
       }  
   
       https.end();  
     } else {  
       Serial.printf("[HTTPS] Unable to connect\n");  
+        int i;
+           for (i=0; i<3; i++){               
+         data[i].tmp_min="-1";          
+         data[i].tmp_max="-1";    
+         data[i].datestr="N/A";
+         data[i].iconMeteoCon=")";
+           }
     }  
 
 }
