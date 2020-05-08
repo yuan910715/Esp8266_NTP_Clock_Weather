@@ -30,10 +30,10 @@ DS18B20库      用于读取DS18B20的温度,检测房间内实时温度
 ESP8266 and ESP32 OLED driver for SSD1306 displays库   用于驱动OLED屏幕显示内容  
 OneWire库      用于连接DS18B20
 
-3.焊接/连线  
+## 焊接/连线  
 我的接线方法:(你也可以按你的喜好来,注意修改程序中的接口信息)  
 
-4.程序  
+## 程序  
 需要修改的地方：  
 你的wifissid 密码  
 // WIFI  
@@ -49,3 +49,19 @@ uint8_t address[] = {0x28,0x44,0x9B,0x16,0xA8,0x01,0x3C,0x4B};
 #define TZ              -8       // (utc+) TZ in hours  
 #define DST_MN          0      // use 60mn for summer time in some countries  
 
+第二屏实时天气 第三屏预报的更新频率
+const int UPDATE_INTERVAL_SECS = 20 * 60; // Update every 20 minutes  online weather  
+DS18B20更新频率
+const int UPDATE_CURR_INTERVAL_SECS = 10; // Update every 10 secs DS18B20  
+NTP时间更新频率
+const int UPDATE_NTP_INTERVAL_SECS = 24*60*60; // Update every day  
+OLED地址以及管脚信息
+const int I2C_DISPLAY_ADDRESS = 0x3c;  
+#if defined(ESP8266)  
+const int SDA_PIN = D2;  
+const int SDC_PIN = D5;  
+#endif  
+
+和风天气KEY 城市ID 自行去https://dev.heweather.com/ 注册  
+const char* HEFENG_KEY="";   
+const char* HEFENG_LOCATION="";  
