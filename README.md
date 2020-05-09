@@ -80,3 +80,9 @@ SH1106Wire     display(I2C_DISPLAY_ADDRESS, SDA_PIN, SDC_PIN);   // or SSD1306Wi
 ## 其他
 和风天气目前免费版API提供了实时天气 天气预报 市级的空气质量等 可用的信息很多 如果你想显示其他信息 请查看API https://dev.heweather.com/docs/api/ 并更改HeFeng.app HeFeng.h中的结构体以及JSON解析信息  
 如果你想用其他网站的API 请自行修改HeFeng.app HeFeng.h
+
+## 改进
+
+用这个128*64的oled屏幕尺寸一般为0.96或1.3英寸 如果喜欢大尺寸 可以将屏幕换成max7219点阵, 改下程序的显示部分就可以  
+目前连接的wifi的ssid/pass是写死在程序里 烧录进开发板的 如果要改的话就需要重新烧录  
+后续有时间的话我会让esp8266建一个webServer 写一个网页用于配置wifi信息 若没连上wifi就建立一个AP 手机连上访问webServer就能配置了。
