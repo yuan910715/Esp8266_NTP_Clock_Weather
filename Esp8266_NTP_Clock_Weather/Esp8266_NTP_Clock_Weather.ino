@@ -55,7 +55,7 @@ const char* WIFI_SSID = "";
 const char* WIFI_PWD = "";
 
 DS18B20 ds(D7);
-uint8_t address[] = {0x28,0x44,0x9B,0x16,0xA8,0x01,0x3C,0x4B};
+
 
 #define TZ              -8       // (utc+) TZ in hours
 #define DST_MN          0      // use 60mn for summer time in some countries
@@ -133,7 +133,7 @@ void setup() {
   Serial.begin(115200);
   Serial.println();
   Serial.println();
-  ds.select(address);
+
   // initialize dispaly
   display.init();
   display.clear();
