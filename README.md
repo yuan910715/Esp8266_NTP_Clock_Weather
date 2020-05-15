@@ -50,8 +50,7 @@ const char* WIFI_PWD = "";
 
 DS18B20 数据端(中间角) 连接的位置  
 DS18B20 ds(D7);  
-DSB18B20地址 用DS18B20库的example程序可获取到  
-uint8_t address[] = {0x28,0x44,0x9B,0x16,0xA8,0x01,0x3C,0x4B};
+
 
 时区以及夏令时设置  
 #define TZ              -8       // (utc+) TZ in hours  
