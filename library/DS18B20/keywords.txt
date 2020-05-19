@@ -1,0 +1,31 @@
+DS18B20	KEYWORD1
+
+select	KEYWORD2
+selectNext	KEYWORD2
+selectNextAlarm	KEYWORD2
+resetSearch	KEYWORD2
+getTempC	KEYWORD2
+getTempF	KEYWORD2
+getResolution	KEYWORD2
+setResolution	KEYWORD2
+getPowerMode	KEYWORD2
+getFamilyCode	KEYWORD2
+getAddress	KEYWORD2
+doConversion	KEYWORD2
+getNumberOfDevices	KEYWORD2
+hasAlarm	KEYWORD2
+setAlarms	KEYWORD2
+getAlarmLow	KEYWORD2
+setAlarmLow	KEYWORD2
+getAlarmHigh	KEYWORD2
+setAlarmHigh	KEYWORD2
+setRegisters	KEYWORD2
+getLowRegister	KEYWORD2
+setLowRegister	KEYWORD2
+getHighRegister	KEYWORD2
+setHighRegister	KEYWORD2
+
+MODEL_DS1820	LITERAL1
+MODEL_DS18S20	LITERAL1
+MODEL_DS1822	LITERAL1
+MODEL_DS18B20	LITERAL1
