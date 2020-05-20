@@ -28,8 +28,8 @@ See more at https://thingpulse.com
 #include <DS18B20.h>
 #include <Arduino.h>
 
-#include <ESPWiFi.h>
-#include <ESPHTTPClient.h>
+#include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
 
 // time
 #include <time.h>                       // time() ctime()
@@ -197,8 +197,11 @@ void loop() {
     timeSinceLastWUpdate = millis();
   }
  if (millis() - timeSinceLastCurrUpdate > (1000L*UPDATE_CURR_INTERVAL_SECS)) {
+    if( ui.getUiState()->frameState == FIXED)
+    {
     currTemp=String(ds.getTempC(), 1);
     timeSinceLastCurrUpdate = millis();
+    }
   }
 
 
