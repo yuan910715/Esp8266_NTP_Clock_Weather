@@ -67,7 +67,7 @@ const int SDA_PIN = D2;
 const int SDC_PIN = D5;  
 #endif  
 
-和风天气KEY 城市ID 自行去https://dev.heweather.com/ 注册  
+和风天气KEY 城市ID 自行去https://dev.heweather.com/ 注册  城市代码查询https://dev.heweather.com/docs/refer/city   
 const char* HEFENG_KEY="";   
 const char* HEFENG_LOCATION="";  
 
