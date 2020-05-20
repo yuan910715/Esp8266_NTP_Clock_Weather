@@ -236,11 +236,19 @@ void drawProgress(OLEDDisplay *display, int percentage, String label) {
 void updateData(OLEDDisplay *display) {
   drawProgress(display, 30, "Updating weather...");
 
+for(int i=0;i<5;i++){
   HeFengClient.doUpdateCurr(&currentWeather, HEFENG_KEY, HEFENG_LOCATION);
+  if(currentWeather.cond_txt!="no network"){
+    break;}
+ }
   drawProgress(display, 50, "Updating forecasts...");
-
+  
+ for(int i=0;i<5;i++){
   HeFengClient.doUpdateFore(foreWeather, HEFENG_KEY, HEFENG_LOCATION);
-
+    if(foreWeather[0].datestr!="N/A"){
+    break;}
+ }
+ 
   readyForWeatherUpdate = false;
   drawProgress(display, 100, "Done...");
   delay(1000);
