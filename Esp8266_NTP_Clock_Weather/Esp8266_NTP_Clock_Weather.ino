@@ -41,7 +41,7 @@ See more at https://thingpulse.com
 #include "OLEDDisplayUi.h"
 #include "Wire.h"
 #include "HeFeng.h"
-#include "OpenWeatherMapForecast.h"
+
 #include "WeatherStationFonts.h"
 #include "WeatherStationImages.h"
 
