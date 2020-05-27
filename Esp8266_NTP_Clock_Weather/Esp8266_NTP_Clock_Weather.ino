@@ -51,10 +51,6 @@ See more at https://thingpulse.com
  * Begin Settings
  **************************/
 
-// WIFI
-const char* WIFI_SSID = "";
-const char* WIFI_PWD = "";
-
 DS18B20 ds(D7);
 
 
