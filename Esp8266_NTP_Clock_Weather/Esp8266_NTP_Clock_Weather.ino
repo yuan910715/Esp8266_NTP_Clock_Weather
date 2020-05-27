@@ -30,7 +30,8 @@ See more at https://thingpulse.com
 
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
-
+#include <ESP8266WebServer.h>
+#include <ESP8266mDNS.h>
 // time
 #include <time.h>                       // time() ctime()
 #include <sys/time.h>                   // struct timeval
@@ -41,7 +42,7 @@ See more at https://thingpulse.com
 #include "OLEDDisplayUi.h"
 #include "Wire.h"
 #include "HeFeng.h"
-
+#include "OpenWeatherMapForecast.h"
 #include "WeatherStationFonts.h"
 #include "WeatherStationImages.h"
 
@@ -129,6 +130,116 @@ int numberOfFrames = 3;
 OverlayCallback overlays[] = { drawHeaderOverlay };
 int numberOfOverlays = 1;
 
+
+
+bool autoConfig()
+{
+  WiFi.mode(WIFI_STA);
+  WiFi.begin();
+  Serial.print("AutoConfig Waiting......");
+   int counter = 0;
+  for (int i = 0; i < 20; i++)
+  {
+    if (WiFi.status() == WL_CONNECTED)
+    {
+      Serial.println("AutoConfig Success");
+      Serial.printf("SSID:%s\r\n", WiFi.SSID().c_str());
+      Serial.printf("PSW:%s\r\n", WiFi.psk().c_str());
+      WiFi.printDiag(Serial);
+      return true;
+    }
+    else
+    {
+       delay(500);
+    Serial.print(".");
+    display.clear();
+    display.drawString(64, 10, "Connecting to WiFi");
+    display.drawXbm(46, 30, 8, 8, counter % 3 == 0 ? activeSymbole : inactiveSymbole);
+    display.drawXbm(60, 30, 8, 8, counter % 3 == 1 ? activeSymbole : inactiveSymbole);
+    display.drawXbm(74, 30, 8, 8, counter % 3 == 2 ? activeSymbole : inactiveSymbole);
+    display.display(); 
+     counter++; 
+    }
+  }
+  Serial.println("AutoConfig Faild!" );
+  return false;
+}
+ESP8266WebServer server(80);
+String str = "<!DOCTYPE html><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\"><title>ESP8266网页配网</title><script type=\"text/javascript\">function wifi(){var ssid = aa.value;var password = bb.value;var xmlhttp=new XMLHttpRequest();xmlhttp.open(\"GET\",\"/HandleWifi?ssid=\"+ssid+\"&password=\"+password,true);xmlhttp.send();xmlhttp.onload = function(e){alert(this.responseText);}}</script></head><body>hello,我是fxy,输入wifi信息给wifi时钟配网:  <form>WiFi名称：<input type=\"text\" placeholder=\"请输入您WiFi的名称\" id=\"aa\"><br>WiFi密码：<input type=\"text\" placeholder=\"请输入您WiFi的密码\" id=\"bb\"><br><input type=\"button\" value=\"连接\" onclick=\"wifi()\"></form></body></html>";
+void handleRoot() {
+  server.send(200, "text/html", str);
+}
+void HandleWifi()
+{
+    String wifis = server.arg("ssid"); //从JavaScript发送的数据中找ssid的值
+    String wifip = server.arg("password"); //从JavaScript发送的数据中找password的值
+    Serial.println("received:"+wifis);
+    server.send(200, "text/html", "连接中..");
+    WiFi.begin(wifis,wifip);
+    
+}
+
+void handleNotFound() { 
+  String message = "File Not Found\n\n";
+  message += "URI: ";
+  message += server.uri();
+  message += "\nMethod: ";
+  message += (server.method() == HTTP_GET) ? "GET" : "POST";
+  message += "\nArguments: ";
+  message += server.args();
+  message += "\n";
+  for (uint8_t i = 0; i < server.args(); i++) {
+    message += " " + server.argName(i) + ": " + server.arg(i) + "\n";
+  }
+  server.send(404, "text/plain", message);
+}
+
+void htmlConfig()
+{
+    WiFi.mode(WIFI_AP_STA);//设置模式为AP+STA
+    WiFi.softAP("wifi_clock");
+
+    IPAddress myIP = WiFi.softAPIP();
+  
+    if (MDNS.begin("clock")) {
+      Serial.println("MDNS responder started");
+    }
+    
+    server.on("/", handleRoot);
+    server.on("/HandleWifi", HTTP_GET, HandleWifi);
+    server.onNotFound(handleNotFound);//请求失败回调函数
+    MDNS.addService("http", "tcp", 80);
+    server.begin();//开启服务器
+    Serial.println("HTTP server started");
+    int counter = 0;
+    while(1)
+    {
+        server.handleClient();
+        MDNS.update();  
+         delay(500);
+          display.clear();
+          display.drawString(64, 5, "WIFI AP:wifi_clock");
+          display.drawString(64, 20, "192.168.4.1");
+           display.drawString(64, 35, "waiting for config wifi.");
+          display.drawXbm(46, 50, 8, 8, counter % 3 == 0 ? activeSymbole : inactiveSymbole);
+          display.drawXbm(60, 50, 8, 8, counter % 3 == 1 ? activeSymbole : inactiveSymbole);
+          display.drawXbm(74, 50, 8, 8, counter % 3 == 2 ? activeSymbole : inactiveSymbole);
+          display.display();  
+           counter++;
+        if (WiFi.status() == WL_CONNECTED)
+        {
+            Serial.println("HtmlConfig Success");
+            Serial.printf("SSID:%s\r\n", WiFi.SSID().c_str());
+            Serial.printf("PSW:%s\r\n", WiFi.psk().c_str());
+            Serial.println("HTML连接成功");
+            break;
+        }
+    }
+       server.close();  
+       WiFi.mode(WIFI_STA);
+    
+}
+
 void setup() {
   Serial.begin(115200);
   Serial.println();
@@ -144,22 +255,10 @@ void setup() {
   display.setTextAlignment(TEXT_ALIGN_CENTER);
   display.setContrast(255);
 
-  WiFi.begin(WIFI_SSID, WIFI_PWD);
-
-  int counter = 0;
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-    display.clear();
-    display.drawString(64, 10, "Connecting to WiFi");
-    display.drawXbm(46, 30, 8, 8, counter % 3 == 0 ? activeSymbole : inactiveSymbole);
-    display.drawXbm(60, 30, 8, 8, counter % 3 == 1 ? activeSymbole : inactiveSymbole);
-    display.drawXbm(74, 30, 8, 8, counter % 3 == 2 ? activeSymbole : inactiveSymbole);
-    display.display();
-
-    counter++;
-  }
-  
+ bool wifiConfig = autoConfig();
+    if(wifiConfig == false){
+        htmlConfig();//HTML配网
+    }
 
   ui.setTargetFPS(30);
 
