@@ -7,6 +7,10 @@ Esp8266 NTP时钟和气象站(使用和风天气API) 使用NTP网络时间 不�
 
 ![screen3.jpg](https://i.loli.net/2020/05/08/I43O2ELxYrWvAoD.jpg)
 
+## 视频教程
+B站 Monster阿原  除了此项目还有其他有意思的视频分享   
+https://space.bilibili.com/402654671
+
 ## 材料
 ![list.jpg](https://i.loli.net/2020/05/08/1uaDPfY3cjU784m.jpg)
 
