@@ -47,10 +47,10 @@ OneWire库      用于连接DS18B20
 
 ## 程序  
 需要修改的地方：  
-你的wifissid 密码  
+~~你的wifissid 密码
 // WIFI  
 const char* WIFI_SSID = "";  
-const char* WIFI_PWD = "";  
+const char* WIFI_PWD = "";~~
 
 DS18B20 数据端(中间角) 连接的位置  
 DS18B20 ds(D7);  
