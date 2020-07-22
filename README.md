@@ -87,6 +87,6 @@ SH1106Wire     display(I2C_DISPLAY_ADDRESS, SDA_PIN, SDC_PIN);   // or SSD1306Wi
 
 ## 改进
 
-用这个128*64的oled屏幕尺寸一般为0.96或1.3英寸 如果喜欢大尺寸 可以将屏幕换成max7219点阵, 改下程序的显示部分就可以  
+用这个128*64的oled屏幕尺寸一般为0.96或1.3英寸 如果喜欢大尺寸 可以将屏幕换成max7219点阵, 改下程序的显示部分就可以 我的LED点阵时钟项目https://github.com/yuan910715/Esp8266_Wifi_Matrix_Clock  
 （已完成）目前连接的wifi的ssid/pass是写死在程序里 烧录进开发板的 如果要改的话就需要重新烧录  
 后续有时间的话我会让esp8266建一个webServer 写一个网页用于配置wifi信息 若没连上wifi就建立一个AP 手机连上访问webServer就能配置了。
